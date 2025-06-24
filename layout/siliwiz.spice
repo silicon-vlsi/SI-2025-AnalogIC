@@ -1,0 +1,27 @@
+* SiliWiz Simulation (app rev 9058921)
+
+*signals: in out vdd vss
+
+Vdd vdd 0 5 ; power supply: 5V
+Vss vss 0 0 ; ground
+
+* Input pulse: ramp the `in` signal
+Vin in 0 pulse (0 5 0u 50u 50u 1 1)
+
+* Extracted circuit:
+M1000 out in vdd vdd pmos w=5.58u l=3.51u
++  ad=26.6166p pd=20.7u as=23.1012p ps=19.44u
+M1001 out in vss vss nmos w=4.14u l=3.51u
++  ad=19.7478p pd=17.82u as=17.1396p ps=16.56u
+C0 out vdd 0.06fF
+C1 in vdd 0.03fF
+C2 in out 0.01fF
+
+* Models:
+.model nmos nmos (vto=1 tox=15n uo=600 cbd=20f cbs=20f gamma=0.37)
+.model pmos pmos (vto=-1 tox=15n uo=230 cbd=20f cbs=20f gamma=0.37)
+
+* Simulation parameters:
+.tran 500n 60u
+
+.end

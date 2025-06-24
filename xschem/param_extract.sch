@@ -21,7 +21,7 @@ N 50 -50 80 -50 {lab=GND}
 N 80 -50 80 80 {lab=GND}
 N 30 80 80 80 {lab=GND}
 C {vsource.sym} -100 -50 0 0 {name=Vds value=1}
-C {simulator_commands_shown.sym} -410 -330 0 0 {name=COMMANDS
+C {simulator_commands_shown.sym} -420 -340 0 0 {name=COMMANDS
 simulator=ngspice
 only_toplevel=false 
 value="
@@ -29,9 +29,11 @@ value="
 
 .CONTROL 
   OP
-  DC Vds 0 1.8 0.05 Vsb 0 0.5 0.1
+  DC Vds 0 1.8 0.05 TEMP -40 120 20 
+  **Vsb 0 0.5 0.1
   PLOT abs(vds#branch)
   plot sqrt(2*abs(vds#branch))
+  plot log(abs(vds#branch))
 .ENDC
 "}
 C {devices/code.sym} -410 -100 0 0 {name=TT_MODELS
